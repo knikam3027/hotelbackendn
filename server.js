@@ -20,7 +20,7 @@ const corsOrigins = process.env.CORS_ORIGIN
         'http://localhost:5173',
         'http://localhost:7070',
         'https://siddhihotel.netlify.app',
-        'https://siddhhotel-2.onrender.com/register',
+        'https://siddhhotel-2.onrender.com',
         'https://siddhihotels.netlify.app'
     ];
 
