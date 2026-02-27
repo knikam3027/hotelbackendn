@@ -13,13 +13,19 @@ const walletRoutes = require('./routes/walletRoutes');
 const app = express();
 
 // Middleware
-app.use(cors({
-    origin: [
+const corsOrigins = process.env.CORS_ORIGIN 
+    ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+    : [
         'http://localhost:3000',
         'http://localhost:5173',
         'http://localhost:7070',
-        'https://siddhihotel.netlify.app'
-    ],
+        'https://siddhihotel.netlify.app',
+        'https://siddhhotel-2.onrender.com/register',
+        'https://siddhihotels.netlify.app'
+    ];
+
+app.use(cors({
+    origin: corsOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
