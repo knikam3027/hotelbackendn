@@ -3,28 +3,30 @@ require('dotenv').config();
 const Room = require('./models/Room');
 const User = require('./models/User');
 
-// Unsplash image URLs for hotels (free images)
+// Unsplash image URLs for hotels (free images) - Updated with verified working URLs
 const hotelImages = [
-    'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1611892437281-460bfbe1220a?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1618870712282-9b5e89a2b87b?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1445991842772-097fea258e7b?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1564078309867-0105cda4acc5?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1579197368826-187a955e5fb7?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1630079833852-b71f9e12bb10?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1621528273335-e47dc420bfff?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1559599810-46d1c2ef092d?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1542314503-37143f4f6451?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1598928506270-dc92b5ff5e87?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1591825481359-8914282f37f7?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1596438282884-ae1d4e4a8f1b?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1595359707802-91fd358bed7e?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1540541338263-c3a991335ef5?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&h=600&fit=crop', // Modern hotel room
+    'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&h=600&fit=crop', // Luxury bedroom
+    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop', // Hotel room with view
+    'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&h=600&fit=crop', // Elegant hotel room
+    'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&h=600&fit=crop', // Cozy bedroom
+    'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=800&h=600&fit=crop', // Modern hotel bedroom
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&h=600&fit=crop', // Hotel suite
+    'https://images.unsplash.com/photo-1587985064135-0366536eab42?w=800&h=600&fit=crop', // Minimalist room
+    'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&h=600&fit=crop', // Budget hotel room
+    'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&h=600&fit=crop', // Family room
+    'https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=800&h=600&fit=crop', // Deluxe bedroom
+    'https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=800&h=600&fit=crop', // Premium suite
+    'https://images.unsplash.com/photo-1594560913095-8cf34bda576e?w=800&h=600&fit=crop', // Standard room
+    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&h=600&fit=crop', // Hotel bedroom
+    'https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=800&h=600&fit=crop', // Modern suite
+    'https://images.unsplash.com/photo-1631049035848-68c0a6446e93?w=800&h=600&fit=crop', // Luxury room
+    'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop', // Elegant bedroom
+    'https://images.unsplash.com/photo-1571508601891-ca5e7a713859?w=800&h=600&fit=crop', // Hotel room interior
+    'https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&h=600&fit=crop', // Contemporary room
+    'https://images.unsplash.com/photo-1631049421857-465fa6c8de29?w=800&h=600&fit=crop', // Premium bedroom
+    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&h=600&fit=crop', // Suite room
+    'https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?w=800&h=600&fit=crop', // Deluxe room
 ];
 
 // Pune hotel data
