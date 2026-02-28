@@ -316,7 +316,21 @@ const getHardcodedResponse = async (message, userId = null) => {
     
     // Greetings
     if (/^(hi|hello|hey|good morning|good afternoon|good evening|namaste|howdy|greetings|yo|sup)\b/.test(lowerMessage)) {
-        return '👋 **Hello! Welcome to Siddhi Hotel!**\n\nI\'m your hotel assistant with instant booking powers! 🚀\n\n🎯 **What I Can Do:**\n\n🏨 **Instant Booking** - Just say "book me a room"\n💰 Check Wallet Balance\n📅 Cancel Bookings Instantly\n🎭 Pune Attractions & Travel Tips\n✨ Hotel Information & Amenities\n📋 Policies & Support\n\n💡 **Try Now:**\n• "Book me a room today"\n• "Check my balance"\n• "Show me rooms"\n\nWhat would you like to do?';
+        // If user is logged in, fetch their name
+        if (userId) {
+            try {
+                const User = require('../models/User');
+                const user = await User.findById(userId);
+                const userName = user ? user.name : 'Guest';
+                
+                return `👋 **Hello, ${userName}! Welcome to Siddhi Hotel!**\n\nI\'m your hotel assistant with instant booking powers! 🚀\n\n🎯 **What I Can Do For You:**\n\n🏨 **Instant Booking** - Just say "book me a room"\n💰 Check Your Wallet Balance\n📅 Cancel Your Bookings Instantly\n🎭 Pune Attractions & Travel Tips\n✨ Hotel Information & Amenities\n📋 Policies & Support\n\n💡 **Try Now:**\n• "Book me a room today"\n• "Check my balance"\n• "Show me rooms"\n\nHow can I assist you today, ${userName}?`;
+            } catch (error) {
+                console.error('Error fetching user name:', error);
+            }
+        }
+        
+        // Demo mode - not logged in
+        return '👋 **Hello! Welcome to Siddhi Hotel!**\n\nI\'m your hotel assistant with instant booking powers! 🚀\n\n🎯 **What I Can Do:**\n\n🏨 **Instant Booking** - Just say "book me a room"\n💰 Check Wallet Balance\n📅 Cancel Bookings Instantly\n🎭 Pune Attractions & Travel Tips\n✨ Hotel Information & Amenities\n📋 Policies & Support\n\n💡 **Try Now:**\n• "Book me a room today"\n• "Check my balance"\n• "Show me rooms"\n\n🔐 **Login** to get personalized service and access your bookings!\n\nWhat would you like to do?';
     }
 
     // Thank you
